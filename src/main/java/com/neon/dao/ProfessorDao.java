@@ -1,20 +1,28 @@
 package com.neon.dao;
 
-
-
-
-
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
-import com.neon.bean.Student;
+/**
+ * @author user361 Interface for Professor DAO operation.
+ *
+ */
 @Repository
-public interface ProfessorDao  {
-	public Map<String, String> addGrades(String name,String grade);
+public interface ProfessorDao {
 
-	public Map<String,String> viewEnrolledStudent();
-public Map<String,String> viewGrades();
+	/**
+	 * @param grade add grade to student
+	 */
+	public Map<String, String> addGrades(String name, String grade);
+
+	/**
+	 * @return it return enrolled student list.
+	 */
+	public Map<String, String> viewEnrolledStudent();
+
+	/**
+	 * @param grade view grade grade to student
+	 */
+	public Map<String, String> viewGrades();
 }

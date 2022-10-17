@@ -1,5 +1,9 @@
 package com.neon.bean;
 
+/**
+ * @author user361
+ * Professor Bean class.
+ */
 public class Professor {
 private int id;
 private String lastName;

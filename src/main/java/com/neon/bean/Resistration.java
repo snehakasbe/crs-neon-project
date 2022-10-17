@@ -1,5 +1,9 @@
 package com.neon.bean;
 
+/**
+ * @author user361
+ * Registration bean class.
+ */
 public class Resistration {
 private int resistrationId;
 private String firstName;

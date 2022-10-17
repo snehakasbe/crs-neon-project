@@ -1,7 +1,11 @@
 package com.neon.bean;
 
+import java.util.Set;
 
-
+/**
+ * @author user361
+ * This is Course bean class.
+ */
 public class Course {
 	private int courseId;
 	private String cources;

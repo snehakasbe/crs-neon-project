@@ -1,5 +1,9 @@
 package com.neon.bean;
 
+/**
+ * @author user361
+ * Admin bean class.
+ */
 public class Admin {
 private Integer id;
 private String firstName;

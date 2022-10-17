@@ -18,6 +18,10 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.neon.bean.Course;
 import com.neon.bean.Student;
 
+/**
+ * @author user361
+ *  Professor DAO Implementation.
+ */
 @Service
 public class ProfessorImplDAO implements ProfessorDao {
 
@@ -40,20 +44,10 @@ public class ProfessorImplDAO implements ProfessorDao {
 		map1.put("sneha", "D");
 
 	}
-//		 ObjectMapper mapper = new ObjectMapper();
-//		mapper.setDefaultPropertyInclusion(
-//				   JsonInclude.Value.construct(Include.ALWAYS, Include.NON_NULL));
-//	
-////	    mapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
-////	    mapper.setSerializationInclusion(Include.NON_NULL);
-////	    mapper.getSerializerProvider().setNullKeySerializer(new MyNullKeySerializer());
-////	    try {
-////			System.out.println(mapper.writeValueAsString(map1));
-////		} catch (JsonProcessingException e) {
-////			// TODO Auto-generated catch block
-////			e.printStackTrace();
-////		}
 
+	/**
+	 * grade added
+	 */
 	@Override
 	public Map<String, String> addGrades(String name, String grade) {
 

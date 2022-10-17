@@ -2,6 +2,10 @@ package com.neon.dao;
 
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author user361
+ * Admin Dao Implementation.
+ */
 @Repository
 public class AdminImplDAO implements AdminDao {
 
