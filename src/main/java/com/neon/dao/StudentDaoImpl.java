@@ -3,116 +3,79 @@ package com.neon.dao;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.neon.bean.Course;
 import com.neon.bean.FeePayment;
 import com.neon.bean.Student;
+import com.neon.configuration.JDBCConfiguration;
 
 /**
  * @author user361 
  * Student DAO Implementation.
  */
-@Service
+@Repository
 public class StudentDaoImpl implements StudentDao {
-	@Autowired
-	private ProfessorDao professordao;
 
-	private static List<Student> list = new ArrayList<>();
-	static {
-		list.add(new Student(11, "vaibhav", "patil", "vp@gmail.com", "vp", "M", 28));
-		list.add(new Student(12, "snehal", "patil", "sp@gmail.com", "ps", "F", 25));
-		list.add(new Student(11, "sunny", "patil", "sp@gmail.com", "sp", "M", 28));
-		list.add(new Student(11, "komal", "pagar", "kp@gmail.com", "kp", "F", 26));
-	}
-	private static List<Course> list1 = new ArrayList<>();
-	static {
-		list1.add(new Course(101, "course:JAVA", 50000));
-		list1.add(new Course(202, "course:PYTHON", 40000));
-		list1.add(new Course(303, "course:C++", 30000));
-		list1.add(new Course(404, "course:DATA SCIENCE", 60000));
-	}
+	Logger logger = LoggerFactory.getLogger(StudentDaoImpl.class);
+	
 
-	private static List<FeePayment> fee = new ArrayList<>();
+	 @Autowired
+	private	JDBCConfiguration jdbcTemplateObject;
 
-	/**
-	 * Student registration for course.
-	 */
-
+	
+	
 	@Override
-	public List<Student> studentResistratioForCourse(Student student) {
-		list.add(student);
-		System.out.println("Record insert succesfully");
-		return list;
-
+	@Transactional
+	public void studentResistratioForCourse(String firstName, String lastName, String emailId, String gender, int age) {
+		String SQL = "insert into employee (S_Firstname, S_Lastname,S_Email, S_Gender, S_Age) values (?, ?, ?, ?, ?)";
+	      
+		 jdbcTemplateObject.jdbcTemplate().update(SQL);
+		 System.out.println("Created Record Name = " + firstName + " lastName = " + lastName +" Email = " + emailId +" Gender = " + gender +" Age = " + age);
+		
+		
+		
 	}
 
-	/**
-	 * Add course from list.
-	 */
-	@Override
-	public List<Course> addCourse(Course course) {
-		list1.add(course);
-		System.out.println("Record insert succesfully");
-		return list1;
-
-	}
-
-	/**
-	 * drop course.
-	 */
-	@Override
-	public void removeCourse(Long courseId) {
-		list1 = list1.stream().filter(course -> course.equals(courseId)).collect(Collectors.toList());
-
-	}
-
-	/**
-	 * return list of student.
-	 */
-	@Override
-	public List<Student> liststudent() {
-
-		list.forEach((x) -> System.out.println(x));
-		return list;
-
-	}
-
-	/**
-	 * get list of courses.
-	 */
 	@Override
 	public List<Course> listcourse() {
-
-		list1.forEach((x) -> System.out.println(x));
-		return list1;
-
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	/**
-	 * show pay fee and show transaction details.
-	 */
 	@Override
-	public List<FeePayment> payFee(FeePayment feeform) {
-		list.forEach((x) -> System.out.println(x));
-		list1.forEach((x) -> System.out.println(x));
-
-		fee.add(feeform);
-
-		fee.forEach((x) -> System.out.println(x));
-		System.out.println("fee paid successfully");
-		return fee;
-
+	public List<Course> addCourse(Course course) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	/**
-	 * view grade.
-	 */
+	@Override
+	public void removeCourse(Long courseId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Student> liststudent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public Map<String, String> viewGrades() {
-		return professordao.viewGrades();
-
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	@Override
+	public List<FeePayment> payFee(FeePayment feeform) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

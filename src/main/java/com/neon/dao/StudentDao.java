@@ -17,7 +17,7 @@ public interface StudentDao {
 	 * @param student
 	 * @return it return list of student
 	 */
-	public List<Student> studentResistratioForCourse(Student student);
+	public void studentResistratioForCourse(String firstName, String lastName, String emailId, String Gender, int age);
 
 	/**
 	 * @return it return list of course

@@ -1,75 +1,56 @@
 package com.neon.dao;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.neon.bean.Course;
+import com.neon.bean.Grade;
 import com.neon.bean.Student;
+import com.neon.configuration.JDBCConfiguration;
+import com.neon.mapper.GradeMapper;
+import com.neon.mapper.StudentMapper;
 
 /**
- * @author user361
- *  Professor DAO Implementation.
+ * @author user361 Professor DAO Implementation.
  */
-@Service
+@Repository
 public class ProfessorImplDAO implements ProfessorDao {
 
+	// create the reference of looger here
+	Logger logger = LoggerFactory.getLogger(ProfessorImplDAO.class);
+
+	// DI injection of JDBCTemplate
 	@Autowired
-
-	private static List<Student> list = new ArrayList<>();
-	private static Map<String, String> map = new HashMap<String, String>();
-	static {
-		map.put("snehal", "java");
-		map.put("shubham", "Paython");
-		map.put("neha", "c++");
-		map.put("sneha", "Data Science");
-	}
-	private static Map<String, String> map1 = new HashMap<String, String>();
-	static {
-
-		map1.put("snehal", "A");
-		map1.put("shubham", "B");
-		map1.put("neha", "C");
-		map1.put("sneha", "D");
-
-	}
+	private JDBCConfiguration jdbcTemplateObject;
 
 	/**
 	 * grade added
 	 */
 	@Override
-	public Map<String, String> addGrades(String name, String grade) {
-
-		map1.put(name, grade);
-		return map1;
-
+	@Transactional
+	public void addGrades(int studentId, String gradeName) {
+		String SQL = "insert into Exam (studentId, gradeName) values (?, ?)";
+		 jdbcTemplateObject.jdbcTemplate().update( SQL, studentId, gradeName);
+		 System.out.println("Grade = " + gradeName + " Student_Id = " + studentId);		
 	}
 
 	@Override
-
-	public Map<String, String> viewEnrolledStudent() {
-
-		Set s = map.entrySet();
-		System.out.println(s);
-		return map;
+	@Transactional
+	public List<Student> viewEnrolledStudent(int courseId) {
+		String SQL = "select * from student where Course_ID ="+courseId;
+		return jdbcTemplateObject.jdbcTemplate().query( SQL, new StudentMapper());
 	}
 
 	@Override
-	public Map<String, String> viewGrades() {
-		Set s = map1.entrySet();
-		System.out.println(s);
-		return map1;
+	@Transactional
+	public List<Grade> viewGrades() {
+		String SQL = "select gradeName from Grade";
+		return jdbcTemplateObject.jdbcTemplate().query( SQL, new GradeMapper());
 	}
 
 }
